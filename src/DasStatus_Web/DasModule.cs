@@ -17,6 +17,7 @@ namespace DasStatus_Web
     public class DasModule : NancyModule
     {
         private DbConnection _connection;
+        public static TimeZoneInfo koreaTZI = TimeZoneInfo.FindSystemTimeZoneById("Korea Standard Time");
 
         public DasModule()
         {
@@ -68,7 +69,7 @@ namespace DasStatus_Web
 
         public string DisplayDate
         {
-            get { return Utilities.GetRelativeDateTime((DateTime)Date); }
+            get { return Utilities.GetRelativeDateTime(TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, DasModule.koreaTZI), (DateTime)Date); }
         }
     }
 }

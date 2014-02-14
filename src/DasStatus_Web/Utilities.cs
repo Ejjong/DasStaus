@@ -21,9 +21,9 @@ namespace DasStatus_Web
             return connection;
         }
 
-        public static string GetRelativeDateTime(DateTime date)
+        public static string GetRelativeDateTime(DateTime now, DateTime date)
         {
-            TimeSpan ts = DateTime.Now - date;
+            TimeSpan ts = now - date;
             if (ts.TotalMinutes < 1)//seconds ago
                 return (String.Format("{0:0}초", ts.TotalSeconds));
             if (ts.TotalHours < 1)//min ago
