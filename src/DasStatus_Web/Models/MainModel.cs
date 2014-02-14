@@ -13,6 +13,6 @@ namespace DasStatus_Web.Models
 
         public string TwitterWidgetSrc { get; set; }
 
-        public IEnumerable<DasUser> Users { get; set; }
+        public IEnumerable<DasUserEx> Users { get; set; }
     }
 }

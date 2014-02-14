@@ -19,7 +19,7 @@
 					@Current.Status
 				</span>
 				<p class="pull-right" style="font-size:12px;color:rgb(153,153,153);">
-					@Current.Date
+					@Current.DisplayDate
 				</p>
 			</h4>
 			<p class="list-group-item-text">
