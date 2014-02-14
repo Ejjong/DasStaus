@@ -9,6 +9,7 @@ using System.Web.Configuration;
 using Dapper;
 using DapperExtensions;
 using System.Data.Common;
+using DasStatus_Web.Models;
 
 namespace DasStatus_Web
 {
@@ -18,8 +19,14 @@ namespace DasStatus_Web
 
         public DasModule()
         {
-            var ret = GetList();
-            Get["/"] = _ => View["index.sshtml"];
+            var model = new MainModel()
+            {
+                Title = "Das Fahrrad",
+                SubTitle = "Rider Status",
+                TwitterWidgetSrc = "http://platform.twitter.com/widgets/follow_button.1387492107.html#_=1389658876572&id=twitter-widget-1&lang=en&screen_name=dasfahrrad_&shoe_count_true&show_screen_name=true&size=m",
+                Users = GetList()
+            };
+            Get["/"] = _ => View["index.sshtml", model];
             Get["/status"] = _ => "Hello World";
         }
 
