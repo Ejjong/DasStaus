@@ -11,7 +11,8 @@ namespace DasStatus_Web
     public class Utilities
     {
         private static readonly ConnectionStringSettings Connection = WebConfigurationManager.ConnectionStrings["nancyDb"];
-        private static readonly string ConnectionString = Connection.ConnectionString;
+        private static readonly IConfig config = new Config();
+        private static readonly string ConnectionString = config.Get("testDb");
 
         public static SqlConnection GetOpenConnection()
         {
