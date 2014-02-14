@@ -10,7 +10,7 @@ namespace DasStatus_Web
     {
         public DasModule()
         {
-            Get["/status"] = _ => "Hello World";
+            Get["/"] = _ => View["index.sshtml"];
         }
     }
 }
