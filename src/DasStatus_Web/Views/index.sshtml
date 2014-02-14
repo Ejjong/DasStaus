@@ -1,29 +1,30 @@
 ﻿@Master['master']
 
-@Section['Scripts']
-<style type="text/css">
-/* Main marketing message and sign up button */
-.jumbotron {
-	margin: 20px 0;
-	text-align: center;
-}
-.jumbotron h1 {
-	font-size: 80px;
-	line-height: 1;
-}
-.jumbotron .lead {
-	font-size: 24px;
-	line-height: 1.25;
-}
-</style>
-
-@EndSection
-
 @Section['Content']
-<div class="jumbotron">
-	<h1>Das Fahrrad</h1>
-	<p class="lead">Rider Status</p>
-	<hr>
+<div class="container">
+	<h1 class="text-center">Das Fahrrad</h1>
+	<p class="text-center">Rider Status</p>
+	<div class="text-right">
+		<iframe id="twitter-widget-1" class="twitter-follow-button twitter-follow-button" frameborder="0" scrolling="no" data-twttr-rendered="true" title="Twitter Follow Button"
+		src="http://platform.twitter.com/widgets/follow_button.1387492107.html#_=1389658876572&id=twitter-widget-1&lang=en&screen_name=dasfahrrad_&shoe_count_true&show_screen_name=true&size=m" allowtransparency="true"></iframe>
+	</div>
+</div>
+
+<div class="list-group">
+	<a class="list-group-item" style="padding-right:10px">
+		<h4 class="list-group-item-heading">
+			이쫑
+			<span class="label label-success pull-left" style="margin-right:5px">
+				Riding
+			</span>
+			<p class="pull-right" style="font-size:12px;color:rgb(153,153,153);">
+				1/11/14
+		    </p>
+		</h4>
+		<p class="list-group-item-text">
+			잠실선착장
+		</p>
+	</a>
 </div>
 
 @EndSection

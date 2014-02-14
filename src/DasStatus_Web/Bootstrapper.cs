@@ -68,12 +68,5 @@ namespace DasStatus_Web
                 return null;
             });
         }
-
-        protected override void ConfigureConventions(NancyConventions nancyConventions)
-        {
-            base.ConfigureConventions(nancyConventions);
-            //Conventions.StaticContentsConventions.Add(
-            //    StaticContentConventionBuilder.AddDirectory("Scripts", @"Scripts", ".js"));
-        }
     }
 }
