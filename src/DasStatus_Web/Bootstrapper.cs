@@ -31,42 +31,42 @@ namespace DasStatus_Web
 }
 </style><title>RN Emergency - Offline</title></head><body><div class=""jumbotron""><h1>RN Emergency - Offline</h1><p class=""lead"">Offline for Maintenance</p><hr></div></body></html>";
 
-        protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
-        {
-            base.ApplicationStartup(container, pipelines);
+        //protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
+        //{
+        //    base.ApplicationStartup(container, pipelines);
          
-            //pipelines.BeforeRequest.AddItemToStartOfPipeline(ctx =>
-            //    {
-            //        if (!ctx.Request.Url.HostName.Equals("localhost", StringComparison.OrdinalIgnoreCase))
-            //        {
-            //            return new HtmlResponse(HttpStatusCode.OK, stream =>
-            //                {
-            //                    var sw = new StreamWriter(stream, System.Text.Encoding.UTF8) { AutoFlush = true };
-            //                    sw.Write(offlineHtml);
-            //                });
-            //        }
-            //        return null;
-            //    });
-            pipelines.BeforeRequest.AddItemToEndOfPipeline(ctx =>
-            {
-                StaticConfiguration.DisableErrorTraces = true;
-                if (!ctx.Request.Url.HostName.Equals("localhost", StringComparison.OrdinalIgnoreCase))
-                {
-                    var proto = ctx.Request.Headers["X-Forwarded-Proto"].FirstOrDefault();
-                    if (proto == null)
-                    {
-                        if (!ctx.Request.Url.IsSecure)
-                        {
-                            return new RedirectResponse("https://" + ctx.Request.Url.HostName);
-                        }
-                    }
-                    else if (!proto.Equals("https", StringComparison.OrdinalIgnoreCase))
-                    {
-                        return new RedirectResponse("https://" + ctx.Request.Url.HostName);
-                    }
-                }
-                return null;
-            });
-        }
+        //    //pipelines.BeforeRequest.AddItemToStartOfPipeline(ctx =>
+        //    //    {
+        //    //        if (!ctx.Request.Url.HostName.Equals("localhost", StringComparison.OrdinalIgnoreCase))
+        //    //        {
+        //    //            return new HtmlResponse(HttpStatusCode.OK, stream =>
+        //    //                {
+        //    //                    var sw = new StreamWriter(stream, System.Text.Encoding.UTF8) { AutoFlush = true };
+        //    //                    sw.Write(offlineHtml);
+        //    //                });
+        //    //        }
+        //    //        return null;
+        //    //    });
+        //    pipelines.BeforeRequest.AddItemToEndOfPipeline(ctx =>
+        //    {
+        //        StaticConfiguration.DisableErrorTraces = true;
+        //        if (!ctx.Request.Url.HostName.Equals("localhost", StringComparison.OrdinalIgnoreCase))
+        //        {
+        //            var proto = ctx.Request.Headers["X-Forwarded-Proto"].FirstOrDefault();
+        //            if (proto == null)
+        //            {
+        //                if (!ctx.Request.Url.IsSecure)
+        //                {
+        //                    return new RedirectResponse("https://" + ctx.Request.Url.HostName);
+        //                }
+        //            }
+        //            else if (!proto.Equals("https", StringComparison.OrdinalIgnoreCase))
+        //            {
+        //                return new RedirectResponse("https://" + ctx.Request.Url.HostName);
+        //            }
+        //        }
+        //        return null;
+        //    });
+        //}
     }
 }
