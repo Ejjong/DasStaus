@@ -10,6 +10,7 @@ namespace DasStatus_Web
     {
         public DasModule()
         {
+            StaticConfiguration.DisableErrorTraces = true;
             Get["/"] = _ => View["index.sshtml"];
         }
     }
