@@ -21,15 +21,22 @@ namespace DasStatus_Web
 
         public DasModule()
         {
-            var model = new MainModel()
+            Get["/", runAsync: true] = async (_, token) =>
             {
-                Title = "Das Fahrrad",
-                SubTitle = "Rider Status",
-                TwitterWidgetSrc = "http://platform.twitter.com/widgets/follow_button.1387492107.html#_=1389658876572&id=twitter-widget-1&lang=en&screen_name=dasfahrrad_&shoe_count_true&show_screen_name=true&size=m",
-                Users = GetList().Select(u => new DasUserEx(u))
+                var model = new MainModel()
+                {
+                    Title = "Das Fahrrad",
+                    SubTitle = "Rider Status",
+                    TwitterWidgetSrc = "http://platform.twitter.com/widgets/follow_button.1387492107.html#_=1389658876572&id=twitter-widget-1&lang=en&screen_name=dasfahrrad_&shoe_count_true&show_screen_name=true&size=m",
+                    Users = GetList().Select(u => new DasUserEx(u))
+                };
+                return View["index.sshtml", model];
             };
-            Get["/"] = _ => View["index.sshtml", model];
-            Get["/status"] = _ => "Hello World";
+
+            Get["/status"] = _ =>
+            {
+                return "Hello World";
+            };
         }
 
         IEnumerable<DasUser> GetList()
@@ -46,7 +53,7 @@ namespace DasStatus_Web
 
     [Table("DasUser")]
     public class DasUser
-    {   
+    {
         public int Id { get; set; }
         public int TwitterId { get; set; }
         public string Name { get; set; }
