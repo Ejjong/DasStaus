@@ -34,7 +34,7 @@ namespace DasStatus_Web
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
             base.ApplicationStartup(container, pipelines);
-            StaticConfiguration.DisableErrorTraces = true;
+         
             //pipelines.BeforeRequest.AddItemToStartOfPipeline(ctx =>
             //    {
             //        if (!ctx.Request.Url.HostName.Equals("localhost", StringComparison.OrdinalIgnoreCase))
@@ -49,6 +49,7 @@ namespace DasStatus_Web
             //    });
             pipelines.BeforeRequest.AddItemToEndOfPipeline(ctx =>
             {
+                StaticConfiguration.DisableErrorTraces = true;
                 if (!ctx.Request.Url.HostName.Equals("localhost", StringComparison.OrdinalIgnoreCase))
                 {
                     var proto = ctx.Request.Headers["X-Forwarded-Proto"].FirstOrDefault();
