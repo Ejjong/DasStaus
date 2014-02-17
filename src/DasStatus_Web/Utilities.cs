@@ -33,7 +33,8 @@ namespace DasStatus_Web
 
         public static string GetWidgetSrc()
         {
-            return config.Get("widgetSrc");
+            var screenNm = config.Get("screenName");
+            return string.IsNullOrWhiteSpace(screenNm) null : @"http://platform.twitter.com/widgets/follow_button.1387492107.html#_=1389658876572&id=twitter-widget-1&lang=en&screen_name=" + screenNm + "&shoe_count_true&show_screen_name=true&size=m";
         }
 
         public static string GetRelativeDateTime(DateTime now, DateTime date)
