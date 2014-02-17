@@ -10,6 +10,14 @@
 </head>
 <body>
 <div class="container">
+	<h1 class="text-center">@Model.Title</h1>
+	<p class="text-center">@Model.SubTitle</p>
+	<div class="text-right" style="margin-right:-15px;margin-bottom:10px;">
+		<iframe id="twitter-widget-1" class="twitter-follow-button twitter-follow-button" frameborder="0" scrolling="no" data-twttr-rendered="true" title="Twitter Follow Button"
+		src="@Model.TwitterWidgetSrc" style="width:236px;height:20px"></iframe>
+	</div>
+</div>
+<div class="container" style="padding-left:0px;padding-right:0px" >
   @Section['Content']
 </div>
 </body>
