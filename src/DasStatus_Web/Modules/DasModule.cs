@@ -60,6 +60,25 @@ namespace DasStatus_Web.Modules
 
                 return ret;
             };
+
+            Get["/sample"] = _ =>
+            {
+                dynamic ret;
+                using (_connection = Utilities.GetOpenConnection())
+                {
+                   ret = _connection.Insert<DasUser>(
+                        new DasUser
+                        {
+                            TwitterId = 123456789,
+                            Status = "Online",
+                            Name = "테스터",
+                            Date = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, DasModule.koreaTZI)
+                        });
+
+                }
+
+                return ret;
+            };
         }
 
         IEnumerable<DasUser> GetList()
