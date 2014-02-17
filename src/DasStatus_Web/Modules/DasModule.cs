@@ -16,7 +16,7 @@ namespace DasStatus_Web.Modules
 {
     public class DasModule : NancyModule
     {
-        private DbConnection _connection;
+        private SqlConnection _connection;
         public static TimeZoneInfo koreaTZI = TimeZoneInfo.FindSystemTimeZoneById("Korea Standard Time");
 
         public DasModule()
@@ -30,12 +30,35 @@ namespace DasStatus_Web.Modules
                     TwitterWidgetSrc = Utilities.GetWidgetSrc(),
                     Users = GetList().Select(u => new DasUserEx(u)).OrderByDescending(o => o.Date)
                 };
+
                 return View["index.sshtml", model];
             };
 
             Get["/test"] = _ =>
             {
                 return "Hello World";
+            };
+
+            Get["/create"] = _ =>
+            {
+                int ret = default(int);
+                using (_connection = Utilities.GetOpenConnection())
+                {
+                    var sql = @"CREATE TABLE dbo.DasUser
+(
+  [Id]  int IDENTITY(1,1) NOT NULL,
+  [TwitterId] int NOT NULL,
+  [Name]  nvarchar(50)  NOT NULL,
+  [Status]  nvarchar(50)  NOT NULL,
+  [Message]  nvarchar(200)  NOT NULL,
+  [Date] datetime,
+  CONSTRAINT PK_SIS_UserMenu PRIMARY KEY ([Id], [TwitterId])
+);";
+                    var command = new SqlCommand(sql, _connection);
+                    ret = command.ExecuteNonQuery();
+                }
+
+                return ret;
             };
         }
 
