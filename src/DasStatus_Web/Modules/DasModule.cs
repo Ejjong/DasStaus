@@ -72,6 +72,7 @@ namespace DasStatus_Web.Modules
                             TwitterId = 123456789,
                             Status = "Online",
                             Name = "테스터",
+                            Message = "메세지",
                             Date = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, DasModule.koreaTZI)
                         });
 
