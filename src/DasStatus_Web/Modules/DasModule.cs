@@ -66,7 +66,7 @@ namespace DasStatus_Web.Modules
                 dynamic ret;
                 using (_connection = Utilities.GetOpenConnection())
                 {
-                   ret = _connection.Insert<DasUser>(
+                   ret = _connection.Insert(
                         new DasUser
                         {
                             TwitterId = 123456789,
