@@ -96,7 +96,7 @@ namespace DasStatus_Web.Modules
                     _connection.Close();
                 }
 
-                return ret;
+                return ret ? "delete sample users" : "failed or empty";
             };
 
         }
