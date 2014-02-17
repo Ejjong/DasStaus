@@ -94,7 +94,8 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="DasModule.cs" />
+    <Compile Include="Modules\DasModule.cs" />
+    <Compile Include="Models\DasUser.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities.cs" />

@@ -10,9 +10,8 @@ namespace DasStatus_Web
 {
     public class Utilities
     {
-        private static readonly ConnectionStringSettings Connection = WebConfigurationManager.ConnectionStrings["nancyDb"];
         private static readonly IConfig config = new Config();
-        private static readonly string ConnectionString = config.Get("testDb");
+        private static readonly string ConnectionString = config.Get("connectionString");
 
         public static SqlConnection GetOpenConnection()
         {
@@ -20,6 +19,21 @@ namespace DasStatus_Web
             connection.Open();
 
             return connection;
+        }
+
+        public static string GetTitle()
+        {
+            return config.Get("title");
+        }
+
+        public static string GetSubTitle()
+        {
+            return config.Get("subTitle");
+        }
+
+        public static string GetWidgetSrc()
+        {
+            return config.Get("widgetSrc");
         }
 
         public static string GetRelativeDateTime(DateTime now, DateTime date)
