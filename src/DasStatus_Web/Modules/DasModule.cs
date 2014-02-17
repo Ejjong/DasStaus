@@ -56,6 +56,7 @@ namespace DasStatus_Web.Modules
 );";
                     var command = new SqlCommand(sql, _connection);
                     ret = command.ExecuteNonQuery();
+                    _connection.Close();
                 }
 
                 return ret;
@@ -75,11 +76,29 @@ namespace DasStatus_Web.Modules
                             Message = "메세지",
                             Date = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, DasModule.koreaTZI)
                         });
-
+                   _connection.Close();
                 }
 
                 return ret;
             };
+
+
+            Get["/delete"] = _ =>
+            {
+                bool ret = false;
+                using (_connection = Utilities.GetOpenConnection())
+                {
+                    var results = _connection.GetList<DasUser>(new { TwitterId = 123456789 });
+                    foreach(var result in results)
+                    {
+                        ret = _connection.Delete(result);
+                    }
+                    _connection.Close();
+                }
+
+                return ret;
+            };
+
         }
 
         IEnumerable<DasUser> GetList()
@@ -88,6 +107,7 @@ namespace DasStatus_Web.Modules
             using (_connection = Utilities.GetOpenConnection())
             {
                 result = _connection.GetList<DasUser>();
+                _connection.Close();
             }
 
             return result;
