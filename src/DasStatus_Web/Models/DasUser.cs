@@ -34,5 +34,22 @@ namespace DasStatus_Web.Models
         {
             get { return Utilities.GetRelativeDateTime(TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, DasModule.koreaTZI), (DateTime)Date); }
         }
+
+        public string Label
+        {
+            get
+            {
+                switch(Status)
+                {
+                    case "Rinding" :
+                        return "label-important";
+                    case "Online" :
+                        return "label-success";
+                    default :
+                        return "";
+                }
+            }
+        }
+
     }
 }
