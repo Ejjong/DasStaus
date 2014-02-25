@@ -6,7 +6,7 @@
 	<a class="list-group-item" style="padding-right:10px">
 		<h4 class="list-group-item-heading">
 			@Current.Name
-			<span class="label @CurrentLabel pull-left" style="margin-right:5px">
+			<span class="label @Current.Label pull-left" style="margin-right:5px">
 				@Current.Status
 			</span>
 			<p class="pull-right" style="font-size:12px;color:rgb(153,153,153);">
