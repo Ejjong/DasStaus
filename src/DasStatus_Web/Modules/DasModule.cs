@@ -28,7 +28,7 @@ namespace DasStatus_Web.Modules
                     Title = Utilities.GetTitle(),
                     SubTitle = Utilities.GetSubTitle(),
                     TwitterWidgetSrc = Utilities.GetWidgetSrc(),
-                    Users = GetList().Select(u => new DasUserEx(u)).OrderByDescending(o => o.Date)
+                    Users = GetList().Where(u=> u.Status != "Offline").Select(u => new DasUserEx(u)).OrderByDescending(o => o.Date)
                 };
 
                 return View["index.sshtml", model];
