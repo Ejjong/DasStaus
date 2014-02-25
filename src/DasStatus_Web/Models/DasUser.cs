@@ -42,7 +42,7 @@ namespace DasStatus_Web.Models
                 switch(Status)
                 {
                     case "Riding" :
-                        return "label-important";
+                        return "label-danger";
                     case "Online" :
                         return "label-success";
                     default :
