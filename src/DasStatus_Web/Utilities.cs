@@ -24,12 +24,12 @@ namespace DasStatus_Web
             IOrmLiteDialectProvider provider = null;
             if (ConnectionString.StartsWith("postgres://"))
             {
-                connString = GenerateConnectionStringForPostgreSQL(connString);
+                connString = GenerateConnectionStringForPostgreSQL(ConnectionString);
                 provider = PostgreSqlDialect.Provider;
             }
             else if (ConnectionString.StartsWith("sqlserver://"))
             {
-                connString = GenerationConnectionStringForSqlServer(connString);
+                connString = GenerationConnectionStringForSqlServer(ConnectionString);
                 provider = SqlServerDialect.Provider;
             }
             else
