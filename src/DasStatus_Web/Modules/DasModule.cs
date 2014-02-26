@@ -6,17 +6,18 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
-using Dapper;
-using DapperExtensions;
 using System.Data.Common;
 using DasStatus_Web.Models;
 using System.ComponentModel.DataAnnotations;
+using Npgsql;
+using System.Data;
+using ServiceStack.OrmLite;
 
 namespace DasStatus_Web.Modules
 {
     public class DasModule : NancyModule
     {
-        private SqlConnection _connection;
+        private IDbConnection _connection;
         public static TimeZoneInfo koreaTZI = TimeZoneInfo.FindSystemTimeZoneById("Korea Standard Time");
 
         public DasModule()
@@ -39,23 +40,12 @@ namespace DasStatus_Web.Modules
                 return "Hello World";
             };
 
-            Get["/create"] = _ =>
+            Get["/new"] = _ =>
             {
                 int ret = default(int);
                 using (_connection = Utilities.GetOpenConnection())
                 {
-                    var sql = @"CREATE TABLE dbo.DasUser
-(
-  [Id]  int IDENTITY(1,1) NOT NULL,
-  [TwitterId] int NOT NULL,
-  [Name]  nvarchar(50)  NOT NULL,
-  [Status]  nvarchar(50)  NOT NULL,
-  [Message]  nvarchar(200)  NOT NULL,
-  [Date] datetime,
-  CONSTRAINT PK_SIS_UserMenu PRIMARY KEY ([Id], [TwitterId])
-);";
-                    var command = new SqlCommand(sql, _connection);
-                    ret = command.ExecuteNonQuery();
+                    _connection.DropAndCreateTable<DasUser>();
                     _connection.Close();
                 }
 
@@ -67,16 +57,16 @@ namespace DasStatus_Web.Modules
                 dynamic ret;
                 using (_connection = Utilities.GetOpenConnection())
                 {
-                   ret = _connection.Insert(
+                    ret = _connection.Insert(
                         new DasUser
                         {
                             TwitterId = 123456789,
                             Status = "Online",
                             Name = "테스터",
-                            Message = "메세지",
+                            Message = "메세지메세지",
                             Date = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, DasModule.koreaTZI)
                         });
-                   _connection.Close();
+                    _connection.Close();
                 }
 
                 return ret;
@@ -85,32 +75,32 @@ namespace DasStatus_Web.Modules
 
             Get["/delete"] = _ =>
             {
-                bool ret = false;
+                int ret = default(int);
                 using (_connection = Utilities.GetOpenConnection())
                 {
-                    var results = _connection.GetList<DasUser>(new { TwitterId = 123456789 });
-                    foreach(var result in results)
+                    var results = _connection.Where<DasUser>(new { TwitterId = 123456789 });
+                    foreach (var result in results)
                     {
                         ret = _connection.Delete(result);
                     }
                     _connection.Close();
                 }
 
-                return ret ? "delete sample users" : "failed or empty";
+                return ret;
             };
-
         }
 
         IEnumerable<DasUser> GetList()
         {
-            IEnumerable<DasUser> result;
+            IEnumerable<DasUser> result = null;
             using (_connection = Utilities.GetOpenConnection())
             {
-                result = _connection.GetList<DasUser>();
+                result = _connection.Select<DasUser>();
                 _connection.Close();
             }
 
             return result;
         }
+
     }
 }

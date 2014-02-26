@@ -1,19 +1,22 @@
 ﻿using DasStatus_Web.Modules;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using ServiceStack.DataAnnotations;
 
 namespace DasStatus_Web.Models
 {
-    [Table("DasUser")]
+    [Alias("dasuser")]
     public class DasUser
     {
-        public int Id { get; set; }
+        [PrimaryKey]
         public int TwitterId { get; set; }
+        [StringLength(40)]
         public string Name { get; set; }
+        [StringLength(20)]
         public string Status { get; set; }
+        [StringLength(280)]
         public string Message { get; set; }
         public DateTime? Date { get; set; }
     }
@@ -22,7 +25,6 @@ namespace DasStatus_Web.Models
     {
         public DasUserEx(DasUser user)
         {
-            this.Id = user.Id;
             this.TwitterId = user.TwitterId;
             this.Name = user.Name;
             this.Status = user.Status;
@@ -39,13 +41,13 @@ namespace DasStatus_Web.Models
         {
             get
             {
-                switch(Status)
+                switch (Status)
                 {
-                    case "Riding" :
+                    case "Riding":
                         return "label-danger";
-                    case "Online" :
+                    case "Online":
                         return "label-success";
-                    default :
+                    default:
                         return "";
                 }
             }
