@@ -107,7 +107,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Scripts\jquery.min.map" />
     <Content Include="Views\index.sshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
